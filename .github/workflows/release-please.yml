@@ -3,23 +3,18 @@ name: release-please
 on:
   push:
     branches:
-      - main
+      - main  # Aligned with Alex's highlighted change
+
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      # 1. Generate a token using the GitHub App credentials from 1Password
-      - auth:
-        id: generate_token
-        uses: actions/create-github-app-token@v1
+      - uses: google-github-actions/release-please-action@v4
         with:
-          app-id: ${{ vars.RELEASE_PLEASE_APP_ID }}
-          private-key: ${{ secrets.RELEASE_PLEASE_PRIVATE_KEY }}
-
-      # 2. Run Release Please using the generated App token
-      - uses: googleapis/release-please-action@v4
-        with:
-          token: ${{ steps.generate_token.outputs.token }}
+          # Uses the footprint-it monorepo strategy
           config-file: release-please-config.json
           manifest-file: .release-please-manifest.json

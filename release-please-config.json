@@ -1,7 +1,13 @@
 {
   "packages": {
     ".": {
-      "release-type": "terraform-module"
+      "release-type": "terraform",
+      "component": "eks-backup-restore-poc"
     }
-  }
+  },
+  "plugins": [
+    {
+      "type": "sentence-case"
+    }
+  ]
 }
